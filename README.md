@@ -26,4 +26,4 @@ Create an issue / pull-request when we are not keeping our promises, ie:
 
 ## Bonus
 
-We have a delightful utility widget in this package called `ImplicitlyAnimatedBuilder`. Copy/paste it to your project and enjoy!
+We have a delightful utility widget in this package called [ImplicitlyAnimatedBuilder](./lib/implicitly_animated_builder.dart). Copy/paste it to your project and enjoy!
