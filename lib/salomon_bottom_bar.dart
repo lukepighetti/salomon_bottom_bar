@@ -43,8 +43,7 @@ class SalomonBottomBar extends StatelessWidget {
         const EdgeInsets.symmetric(vertical: 10, horizontal: 16.0);
 
     return Padding(
-      padding:
-          margin ?? const EdgeInsets.symmetric(vertical: 8, horizontal: 16.0),
+      padding: margin ?? const EdgeInsets.all(8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
