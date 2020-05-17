@@ -1,0 +1,1 @@
+flutter packages publish --force
