@@ -1,14 +1,23 @@
 # salomon_bottom_bar
 
-A new Flutter package project.
+Yet another bottom navigation bar, but with a few key promises.
 
-## Getting Started
+## Promises
 
-This project is a starting point for a Dart
-[package](https://flutter.dev/developing-packages/),
-a library module containing code that can be shared easily across
-multiple Flutter or Dart projects.
+1. We will meet the specifications provided by Aurélien Salomon and his gorgeous [Google Bottom Bar Navigation Pattern](https://dribbble.com/shots/5925052-Google-Bottom-Bar-Navigation-Pattern/).
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+<img src="./readme/tab-ui-final.gif">
+
+2. We will be accessible.
+
+3. We will mimic the semantics of [BottomNavigationBar](https://api.flutter.dev/flutter/material/BottomNavigationBar-class.html)
+
+NOTE: Any use cases not covered by Salomon's specification are not guaranteed by this package.
+
+## Contributing
+
+Create an issue / pull-request when we are not keeping our promises, ie:
+
+1. The package does not match the Salomon specification.
+2. There is an accessibility problem.
+3. It diverges from `BottomNavigationBar` semantics.
