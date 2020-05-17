@@ -8,7 +8,7 @@ We [guarantee](https://www.youtube.com/watch?v=p9l5Ou-WNro) the following:
 
 1. We will meet the specifications provided by Aurélien Salomon and his gorgeous [Google Bottom Bar Navigation Pattern](https://dribbble.com/shots/5925052-Google-Bottom-Bar-Navigation-Pattern/).
 
-<img src="./readme/tab-ui-final.gif" height="300">
+<img src="https://raw.githubusercontent.com/lukepighetti/salomon_bottom_bar/master/readme/tab-ui-final.gif" height="300">
 
 2. We will be accessible.
 
