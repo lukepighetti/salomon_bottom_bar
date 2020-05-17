@@ -13,10 +13,9 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   var _selectedTab = _SelectedTab.home;
 
-  void _handleValueTapped(_SelectedTab e) {
+  void _handleIndexChanged(int i) {
     setState(() {
-      _selectedTab = e;
-      print(e);
+      _selectedTab = _SelectedTab.values[i];
     });
   }
 
@@ -33,40 +32,36 @@ class _MyAppState extends State<MyApp> {
           title: Text("salomon_bottom_bar"),
         ),
         body: Center(
-          child: SalomonBottomBar<_SelectedTab>(
-            selectedValue: _selectedTab,
-            onValueTapped: _handleValueTapped,
-            tabs: [
+          child: SalomonBottomBar(
+            currentIndex: _SelectedTab.values.indexOf(_selectedTab),
+            onTap: _handleIndexChanged,
+            items: [
               /// Home
-              SBBTab(
+              SBBItem(
                 icon: Icon(Icons.home),
-                title: "Home",
-                color: Colors.purple,
-                value: _SelectedTab.home,
+                title: Text("Home"),
+                selectedColor: Colors.purple,
               ),
 
               /// Likes
-              SBBTab(
+              SBBItem(
                 icon: Icon(Icons.favorite_border),
-                title: "Likes",
-                color: Colors.pink,
-                value: _SelectedTab.likes,
+                title: Text("Likes"),
+                selectedColor: Colors.pink,
               ),
 
               /// Search
-              SBBTab(
+              SBBItem(
                 icon: Icon(Icons.search),
-                title: "Search",
-                color: Colors.orange,
-                value: _SelectedTab.search,
+                title: Text("Search"),
+                selectedColor: Colors.orange,
               ),
 
               /// Profile
-              SBBTab(
+              SBBItem(
                 icon: Icon(Icons.person),
-                title: "Profile",
-                color: Colors.teal,
-                value: _SelectedTab.profile,
+                title: Text("Profile"),
+                selectedColor: Colors.teal,
               ),
             ],
           ),
