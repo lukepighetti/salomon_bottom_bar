@@ -51,8 +51,8 @@ class SalomonBottomBar extends StatelessWidget {
           for (final item in items)
             ImplicitlyAnimatedBuilder(
               isActive: items.indexOf(item) == currentIndex,
-              curve: Curves.easeOut,
-              duration: Duration(milliseconds: 250),
+              curve: Curves.easeOutQuint,
+              duration: Duration(milliseconds: 500),
               builder: (context, t) {
                 final _selectedColor =
                     item.selectedColor ?? selectedItemColor ?? Colors.black;
