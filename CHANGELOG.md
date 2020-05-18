@@ -1,3 +1,7 @@
+## [1.0.6] - May 18, 2020
+
+- Match hover/highlight/splash/focus colors to selectedColor
+
 ## [1.0.5] - May 18, 2020
 
 - Improve color transitions
