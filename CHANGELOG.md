@@ -1,3 +1,7 @@
+## [1.0.5] - May 18, 2020
+
+- Improve color transitions
+
 ## [1.0.4] - May 18, 2020
 
 - Refactor to use TweenAnimationBuilder

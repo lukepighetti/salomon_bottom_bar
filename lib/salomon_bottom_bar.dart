@@ -60,8 +60,8 @@ class SalomonBottomBar extends StatelessWidget {
                     item.unselectedColor ?? unselectedItemColor ?? Colors.black;
 
                 return Material(
-                  color: Color.lerp(
-                      Colors.transparent, _selectedColor.withOpacity(0.10), t),
+                  color: Color.lerp(_selectedColor.withOpacity(0.0),
+                      _selectedColor.withOpacity(0.1), t),
                   shape: StadiumBorder(),
                   child: InkWell(
                     onTap: () => onTap?.call(items.indexOf(item)),
@@ -95,8 +95,10 @@ class SalomonBottomBar extends StatelessWidget {
                                       right: _itemPadding.right),
                                   child: DefaultTextStyle(
                                     style: TextStyle(
-                                      color: Color.lerp(Colors.transparent,
-                                          _selectedColor, t),
+                                      color: Color.lerp(
+                                          _selectedColor.withOpacity(0.0),
+                                          _selectedColor,
+                                          t),
                                       fontWeight: FontWeight.w600,
                                     ),
                                     child: item.title ?? SizedBox.shrink(),
