@@ -2,8 +2,6 @@ library salomon_bottom_bar;
 
 import 'package:flutter/material.dart';
 
-import 'implicitly_animated_builder.dart';
-
 class SalomonBottomBar extends StatelessWidget {
   /// A list of tabs to display, ie `Home`, `Likes`, etc
   final List<SBBItem> items;
@@ -48,11 +46,13 @@ class SalomonBottomBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           for (final item in items)
-            ImplicitlyAnimatedBuilder(
-              isActive: items.indexOf(item) == currentIndex,
+            TweenAnimationBuilder<double>(
+              tween: Tween(
+                end: items.indexOf(item) == currentIndex ? 1.0 : 0.0,
+              ),
               curve: Curves.easeOutQuint,
               duration: Duration(milliseconds: 500),
-              builder: (context, t) {
+              builder: (context, t, _) {
                 final _selectedColor =
                     item.selectedColor ?? selectedItemColor ?? Colors.black;
 

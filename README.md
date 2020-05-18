@@ -23,7 +23,3 @@ Create an issue / pull-request when we are not keeping our promises, ie:
 1. The package does not match the Salomon specification.
 2. There is an accessibility problem.
 3. It diverges from `BottomNavigationBar` semantics.
-
-## Bonus
-
-We have a delightful utility widget in this package called [ImplicitlyAnimatedBuilder](./lib/implicitly_animated_builder.dart). Copy/paste it to your project and enjoy!
