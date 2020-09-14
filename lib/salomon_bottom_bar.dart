@@ -1,10 +1,24 @@
-library salomon_bottom_bar;
-
 import 'package:flutter/material.dart';
 
 class SalomonBottomBar extends StatelessWidget {
+  /// A bottom bar that faithfully follows the design by Aurélien Salomon
+  ///
+  /// https://dribbble.com/shots/5925052-Google-Bottom-Bar-Navigation-Pattern/
+  SalomonBottomBar({
+    Key key,
+    @required this.items,
+    this.currentIndex = 0,
+    this.onTap,
+    this.selectedItemColor,
+    this.unselectedItemColor,
+    this.margin = const EdgeInsets.all(8),
+    this.itemPadding = const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+    this.duration = const Duration(milliseconds: 500),
+    this.curve = Curves.easeOutQuint,
+  }) : super(key: key);
+
   /// A list of tabs to display, ie `Home`, `Likes`, etc
-  final List<SBBItem> items;
+  final List<SalomonBottomBarItem> items;
 
   /// The tab to display.
   final int currentIndex;
@@ -24,24 +38,18 @@ class SalomonBottomBar extends StatelessWidget {
   /// The padding of each item.
   final EdgeInsets itemPadding;
 
-  SalomonBottomBar({
-    Key key,
-    @required this.items,
-    this.currentIndex,
-    this.onTap,
-    this.selectedItemColor,
-    this.unselectedItemColor,
-    this.margin,
-    this.itemPadding,
-  }) : super(key: key);
+  /// The transition duration
+  final Duration duration;
+
+  /// The transition curve
+  final Curve curve;
 
   @override
   Widget build(BuildContext context) {
-    final _itemPadding = itemPadding ??
-        const EdgeInsets.symmetric(vertical: 10, horizontal: 16.0);
+    final theme = Theme.of(context);
 
     return Padding(
-      padding: margin ?? const EdgeInsets.all(8),
+      padding: margin,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -50,14 +58,16 @@ class SalomonBottomBar extends StatelessWidget {
               tween: Tween(
                 end: items.indexOf(item) == currentIndex ? 1.0 : 0.0,
               ),
-              curve: Curves.easeOutQuint,
-              duration: Duration(milliseconds: 500),
+              curve: curve,
+              duration: duration,
               builder: (context, t, _) {
-                final _selectedColor =
-                    item.selectedColor ?? selectedItemColor ?? Colors.black;
+                final _selectedColor = item.selectedColor ??
+                    selectedItemColor ??
+                    theme.primaryColor;
 
-                final _unselectedColor =
-                    item.unselectedColor ?? unselectedItemColor ?? Colors.black;
+                final _unselectedColor = item.unselectedColor ??
+                    unselectedItemColor ??
+                    theme.iconTheme.color;
 
                 return Material(
                   color: Color.lerp(_selectedColor.withOpacity(0.0),
@@ -71,8 +81,8 @@ class SalomonBottomBar extends StatelessWidget {
                     splashColor: _selectedColor.withOpacity(0.1),
                     hoverColor: _selectedColor.withOpacity(0.1),
                     child: Padding(
-                      padding: _itemPadding -
-                          EdgeInsets.only(right: _itemPadding.right * t),
+                      padding: itemPadding -
+                          EdgeInsets.only(right: itemPadding.right * t),
                       child: Row(
                         children: [
                           IconTheme(
@@ -95,8 +105,8 @@ class SalomonBottomBar extends StatelessWidget {
                                 widthFactor: t,
                                 child: Padding(
                                   padding: EdgeInsets.only(
-                                      left: _itemPadding.right / 2,
-                                      right: _itemPadding.right),
+                                      left: itemPadding.right / 2,
+                                      right: itemPadding.right),
                                   child: DefaultTextStyle(
                                     style: TextStyle(
                                       color: Color.lerp(
@@ -125,7 +135,7 @@ class SalomonBottomBar extends StatelessWidget {
 }
 
 /// A tab to display in a [SalomonBottomBar]
-class SBBItem {
+class SalomonBottomBarItem {
   /// An icon to display.
   final Widget icon;
 
@@ -138,7 +148,11 @@ class SBBItem {
   /// The color to display when this tab is not selected.
   final Color unselectedColor;
 
-  SBBItem({this.icon, this.title, this.selectedColor, this.unselectedColor})
-      : assert(icon != null, "Every SBBItem requires an icon."),
-        assert(title != null, "Every SBBItem requires a title.");
+  SalomonBottomBarItem({
+    @required this.icon,
+    @required this.title,
+    this.selectedColor,
+    this.unselectedColor,
+  })  : assert(icon != null, "Every SalomonBottomBarItem requires an icon."),
+        assert(title != null, "Every SalomonBottomBarItem requires a title.");
 }

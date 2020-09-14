@@ -1,3 +1,10 @@
+## [2.0.0] - September 13, 2020
+
+- Use Material icon/primary colors automatically
+- Follow BottomNavigationBar API more closely by making currentIndex optional
+- Expose duration and curve
+- Change SBBItem to SalomonBottomBarItem
+
 ## [1.0.6] - May 18, 2020
 
 - Match hover/highlight/splash/focus colors to selectedColor

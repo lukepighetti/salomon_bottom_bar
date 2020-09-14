@@ -37,28 +37,28 @@ class _MyAppState extends State<MyApp> {
             onTap: _handleIndexChanged,
             items: [
               /// Home
-              SBBItem(
+              SalomonBottomBarItem(
                 icon: Icon(Icons.home),
                 title: Text("Home"),
                 selectedColor: Colors.purple,
               ),
 
               /// Likes
-              SBBItem(
+              SalomonBottomBarItem(
                 icon: Icon(Icons.favorite_border),
                 title: Text("Likes"),
                 selectedColor: Colors.pink,
               ),
 
               /// Search
-              SBBItem(
+              SalomonBottomBarItem(
                 icon: Icon(Icons.search),
                 title: Text("Search"),
                 selectedColor: Colors.orange,
               ),
 
               /// Profile
-              SBBItem(
+              SalomonBottomBarItem(
                 icon: Icon(Icons.person),
                 title: Text("Profile"),
                 selectedColor: Colors.teal,
