@@ -91,7 +91,7 @@ class SalomonBottomBar extends StatelessWidget {
                                   _unselectedColor, _selectedColor, t),
                               size: 24,
                             ),
-                            child: item.icon ?? SizedBox.shrink(),
+                            child: items.indexOf(item) == currentIndex ? (item.selectedIcon ?? item.icon ?? SizedBox.shrink()) : (item.icon ?? SizedBox.shrink()),
                           ),
                           ClipRect(
                             child: SizedBox(
@@ -139,6 +139,9 @@ class SalomonBottomBarItem {
   /// An icon to display.
   final Widget icon;
 
+  /// An selected icon to display.
+  final Widget selectedIcon;
+
   /// Text to display, ie `Home`
   final Widget title;
 
@@ -153,6 +156,7 @@ class SalomonBottomBarItem {
     @required this.title,
     this.selectedColor,
     this.unselectedColor,
+    this.selectedIcon,
   })  : assert(icon != null, "Every SalomonBottomBarItem requires an icon."),
         assert(title != null, "Every SalomonBottomBarItem requires a title.");
 }
