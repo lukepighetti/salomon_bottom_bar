@@ -1,3 +1,7 @@
+## [2.0.1] - January 30, 2021
+
+- Add selectedItemOpacity
+
 ## [2.0.0] - September 13, 2020
 
 - Use Material icon/primary colors automatically
