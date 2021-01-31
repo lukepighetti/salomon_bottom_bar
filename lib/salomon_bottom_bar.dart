@@ -11,6 +11,7 @@ class SalomonBottomBar extends StatelessWidget {
     this.onTap,
     this.selectedItemColor,
     this.unselectedItemColor,
+    this.selectedColorOpacity,
     this.margin = const EdgeInsets.all(8),
     this.itemPadding = const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
     this.duration = const Duration(milliseconds: 500),
@@ -31,6 +32,9 @@ class SalomonBottomBar extends StatelessWidget {
 
   /// The color of the icon and text when the item is not selected.
   final Color unselectedItemColor;
+
+  /// The opacity of color of the touchable background when the item is selected.
+  final double selectedColorOpacity;
 
   /// A convenience field for the margin surrounding the entire widget.
   final EdgeInsets margin;
@@ -71,7 +75,7 @@ class SalomonBottomBar extends StatelessWidget {
 
                 return Material(
                   color: Color.lerp(_selectedColor.withOpacity(0.0),
-                      _selectedColor.withOpacity(0.1), t),
+                      _selectedColor.withOpacity(selectedColorOpacity ?? 0.1), t),
                   shape: StadiumBorder(),
                   child: InkWell(
                     onTap: () => onTap?.call(items.indexOf(item)),
