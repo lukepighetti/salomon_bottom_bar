@@ -33,7 +33,7 @@ class SalomonBottomBar extends StatelessWidget {
   /// The color of the icon and text when the item is not selected.
   final Color unselectedItemColor;
 
-  /// The opacity of color of the icon and text when the item is selected.
+  /// The opacity of color of the touchable background when the item is selected.
   final double selectedColorOpacity;
 
   /// A convenience field for the margin surrounding the entire widget.
