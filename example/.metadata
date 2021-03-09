@@ -4,7 +4,7 @@
 # This file should be version controlled and should not be manually edited.
 
 version:
-  revision: 456d80b9ddd74b4b5ca3b77bbfb70ab0e05d3fa8
-  channel: dev
+  revision: 66ef1317246f8d85cc77cb69a54b055845cb0765
+  channel: lukepighetti/goldens-epsilon
 
 project_type: app
