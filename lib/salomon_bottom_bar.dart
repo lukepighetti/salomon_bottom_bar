@@ -5,8 +5,8 @@ class SalomonBottomBar extends StatelessWidget {
   ///
   /// https://dribbble.com/shots/5925052-Google-Bottom-Bar-Navigation-Pattern/
   SalomonBottomBar({
-    Key key,
-    @required this.items,
+    Key? key,
+    required this.items,
     this.currentIndex = 0,
     this.onTap,
     this.selectedItemColor,
@@ -25,16 +25,16 @@ class SalomonBottomBar extends StatelessWidget {
   final int currentIndex;
 
   /// Returns the index of the tab that was tapped.
-  final Function(int) onTap;
+  final Function(int)? onTap;
 
   /// The color of the icon and text when the item is selected.
-  final Color selectedItemColor;
+  final Color? selectedItemColor;
 
   /// The color of the icon and text when the item is not selected.
-  final Color unselectedItemColor;
+  final Color? unselectedItemColor;
 
   /// The opacity of color of the touchable background when the item is selected.
-  final double selectedColorOpacity;
+  final double? selectedColorOpacity;
 
   /// A convenience field for the margin surrounding the entire widget.
   final EdgeInsets margin;
@@ -74,8 +74,10 @@ class SalomonBottomBar extends StatelessWidget {
                     theme.iconTheme.color;
 
                 return Material(
-                  color: Color.lerp(_selectedColor.withOpacity(0.0),
-                      _selectedColor.withOpacity(selectedColorOpacity ?? 0.1), t),
+                  color: Color.lerp(
+                      _selectedColor.withOpacity(0.0),
+                      _selectedColor.withOpacity(selectedColorOpacity ?? 0.1),
+                      t),
                   shape: StadiumBorder(),
                   child: InkWell(
                     onTap: () => onTap?.call(items.indexOf(item)),
@@ -95,7 +97,9 @@ class SalomonBottomBar extends StatelessWidget {
                                   _unselectedColor, _selectedColor, t),
                               size: 24,
                             ),
-                            child: items.indexOf(item) == currentIndex ? (item.activeIcon ?? item.icon ?? SizedBox.shrink()) : (item.icon ?? SizedBox.shrink()),
+                            child: items.indexOf(item) == currentIndex
+                                ? item.activeIcon ?? item.icon
+                                : item.icon,
                           ),
                           ClipRect(
                             child: SizedBox(
@@ -119,7 +123,7 @@ class SalomonBottomBar extends StatelessWidget {
                                           t),
                                       fontWeight: FontWeight.w600,
                                     ),
-                                    child: item.title ?? SizedBox.shrink(),
+                                    child: item.title,
                                   ),
                                 ),
                               ),
@@ -144,23 +148,22 @@ class SalomonBottomBarItem {
   final Widget icon;
 
   /// An icon to display when this tab bar is active.
-  final Widget activeIcon;
+  final Widget? activeIcon;
 
   /// Text to display, ie `Home`
   final Widget title;
 
   /// A primary color to use for this tab.
-  final Color selectedColor;
+  final Color? selectedColor;
 
   /// The color to display when this tab is not selected.
-  final Color unselectedColor;
+  final Color? unselectedColor;
 
   SalomonBottomBarItem({
-    @required this.icon,
-    @required this.title,
+    required this.icon,
+    required this.title,
     this.selectedColor,
     this.unselectedColor,
     this.activeIcon,
-  })  : assert(icon != null, "Every SalomonBottomBarItem requires an icon."),
-        assert(title != null, "Every SalomonBottomBarItem requires a title.");
+  });
 }

@@ -1,6 +1,10 @@
+## [3.0.0] - March 9, 2021
+
+- Null safety
+
 ## [2.0.1] - January 30, 2021
 
-- Add selectedItemOpacity
+- Add selectedColorOpacity
 
 ## [2.0.0] - September 13, 2020
 
