@@ -12,6 +12,7 @@ class SalomonBottomBar extends StatelessWidget {
     this.selectedItemColor,
     this.unselectedItemColor,
     this.selectedColorOpacity,
+    this.itemShape = const StadiumBorder(),
     this.margin = const EdgeInsets.all(8),
     this.itemPadding = const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
     this.duration = const Duration(milliseconds: 500),
@@ -35,6 +36,9 @@ class SalomonBottomBar extends StatelessWidget {
 
   /// The opacity of color of the touchable background when the item is selected.
   final double? selectedColorOpacity;
+
+  /// The border shape of each item.
+  final ShapeBorder itemShape;
 
   /// A convenience field for the margin surrounding the entire widget.
   final EdgeInsets margin;
@@ -73,15 +77,17 @@ class SalomonBottomBar extends StatelessWidget {
                     unselectedItemColor ??
                     theme.iconTheme.color;
 
+                final _itemShape = item.shape ?? itemShape;
+
                 return Material(
                   color: Color.lerp(
                       _selectedColor.withOpacity(0.0),
                       _selectedColor.withOpacity(selectedColorOpacity ?? 0.1),
                       t),
-                  shape: StadiumBorder(),
+                  shape: _itemShape,
                   child: InkWell(
                     onTap: () => onTap?.call(items.indexOf(item)),
-                    customBorder: StadiumBorder(),
+                    customBorder: _itemShape,
                     focusColor: _selectedColor.withOpacity(0.1),
                     highlightColor: _selectedColor.withOpacity(0.1),
                     splashColor: _selectedColor.withOpacity(0.1),
@@ -153,6 +159,9 @@ class SalomonBottomBarItem {
   /// Text to display, ie `Home`
   final Widget title;
 
+  /// The shape of this item.
+  final ShapeBorder? shape;
+
   /// A primary color to use for this tab.
   final Color? selectedColor;
 
@@ -162,6 +171,7 @@ class SalomonBottomBarItem {
   SalomonBottomBarItem({
     required this.icon,
     required this.title,
+    this.shape,
     this.selectedColor,
     this.unselectedColor,
     this.activeIcon,
