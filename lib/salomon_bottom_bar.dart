@@ -77,17 +77,15 @@ class SalomonBottomBar extends StatelessWidget {
                     unselectedItemColor ??
                     theme.iconTheme.color;
 
-                final _itemShape = item.shape ?? itemShape;
-
                 return Material(
                   color: Color.lerp(
                       _selectedColor.withOpacity(0.0),
                       _selectedColor.withOpacity(selectedColorOpacity ?? 0.1),
                       t),
-                  shape: _itemShape,
+                  shape: itemShape,
                   child: InkWell(
                     onTap: () => onTap?.call(items.indexOf(item)),
-                    customBorder: _itemShape,
+                    customBorder: itemShape,
                     focusColor: _selectedColor.withOpacity(0.1),
                     highlightColor: _selectedColor.withOpacity(0.1),
                     splashColor: _selectedColor.withOpacity(0.1),
@@ -159,9 +157,6 @@ class SalomonBottomBarItem {
   /// Text to display, ie `Home`
   final Widget title;
 
-  /// The shape of this item.
-  final ShapeBorder? shape;
-
   /// A primary color to use for this tab.
   final Color? selectedColor;
 
@@ -171,7 +166,6 @@ class SalomonBottomBarItem {
   SalomonBottomBarItem({
     required this.icon,
     required this.title,
-    this.shape,
     this.selectedColor,
     this.unselectedColor,
     this.activeIcon,
