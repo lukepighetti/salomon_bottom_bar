@@ -1,3 +1,7 @@
+## [3.1.0] - June 17, 2021
+
+- You can now adjust the button shape with the itemShape constructor argument
+
 ## [3.0.0] - March 9, 2021
 
 - Null safety
