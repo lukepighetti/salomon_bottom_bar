@@ -92,7 +92,16 @@ class SalomonBottomBar extends StatelessWidget {
                     hoverColor: _selectedColor.withOpacity(0.1),
                     child: Padding(
                       padding: itemPadding -
-                          EdgeInsets.only(right: itemPadding.right * t),
+                          EdgeInsets.only(
+                            right:
+                                Directionality.of(context) == TextDirection.ltr
+                                    ? itemPadding.right * t
+                                    : 0,
+                            left:
+                                Directionality.of(context) == TextDirection.ltr
+                                    ? 0
+                                    : itemPadding.left * t,
+                          ),
                       child: Row(
                         children: [
                           IconTheme(
@@ -117,8 +126,14 @@ class SalomonBottomBar extends StatelessWidget {
                                 widthFactor: t,
                                 child: Padding(
                                   padding: EdgeInsets.only(
-                                      left: itemPadding.right / 2,
-                                      right: itemPadding.right),
+                                      left: Directionality.of(context) ==
+                                              TextDirection.ltr
+                                          ? itemPadding.left / 2
+                                          : itemPadding.left,
+                                      right: Directionality.of(context) ==
+                                              TextDirection.ltr
+                                          ? itemPadding.right
+                                          : itemPadding.right / 2),
                                   child: DefaultTextStyle(
                                     style: TextStyle(
                                       color: Color.lerp(
