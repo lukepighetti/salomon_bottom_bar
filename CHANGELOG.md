@@ -1,3 +1,7 @@
+## [3.2.0] - December 9, 2021
+
+- Added RTL text directionality support
+
 ## [3.1.0] - June 17, 2021
 
 - You can now adjust the button shape with the itemShape constructor argument
