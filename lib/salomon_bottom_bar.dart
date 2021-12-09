@@ -92,16 +92,9 @@ class SalomonBottomBar extends StatelessWidget {
                     hoverColor: _selectedColor.withOpacity(0.1),
                     child: Padding(
                       padding: itemPadding -
-                          EdgeInsets.only(
-                            right:
-                                Directionality.of(context) == TextDirection.ltr
-                                    ? itemPadding.right * t
-                                    : 0,
-                            left:
-                                Directionality.of(context) == TextDirection.ltr
-                                    ? 0
-                                    : itemPadding.left * t,
-                          ),
+                          (Directionality.of(context) == TextDirection.ltr
+                              ? EdgeInsets.only(right: itemPadding.right * t)
+                              : EdgeInsets.only(left: itemPadding.left * t)),
                       child: Row(
                         children: [
                           IconTheme(
@@ -125,15 +118,14 @@ class SalomonBottomBar extends StatelessWidget {
                                 alignment: Alignment(-0.2, 0.0),
                                 widthFactor: t,
                                 child: Padding(
-                                  padding: EdgeInsets.only(
-                                      left: Directionality.of(context) ==
-                                              TextDirection.ltr
-                                          ? itemPadding.left / 2
-                                          : itemPadding.left,
-                                      right: Directionality.of(context) ==
-                                              TextDirection.ltr
-                                          ? itemPadding.right
-                                          : itemPadding.right / 2),
+                                  padding: Directionality.of(context) ==
+                                          TextDirection.ltr
+                                      ? EdgeInsets.only(
+                                          left: itemPadding.left / 2,
+                                          right: itemPadding.right)
+                                      : EdgeInsets.only(
+                                          left: itemPadding.left,
+                                          right: itemPadding.right / 2),
                                   child: DefaultTextStyle(
                                     style: TextStyle(
                                       color: Color.lerp(
