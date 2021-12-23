@@ -1,4 +1,4 @@
-.PHONY: setup clean format test distribute
+.PHONY: setup clean get test publish ci distribute
 
 setup:
 	flutter channel stable
@@ -6,8 +6,10 @@ setup:
 	
 clean:
 	flutter clean
-	flutter pub get
 	cd example && flutter clean
+
+get:
+	flutter pub get
 	cd example && flutter pub get
 
 test:
@@ -16,5 +18,9 @@ test:
 	cd example && flutter analyze
 	cd example && flutter format --dry-run --set-exit-if-changed lib
 
-distribute: setup clean test
+publish:
 	flutter pub publish
+
+ci: get test
+
+distribute: setup clean get test publish
