@@ -30,6 +30,7 @@ class _MyAppState extends State<MyApp> {
         bottomNavigationBar: SalomonBottomBar(
           currentIndex: _currentIndex,
           onTap: (i) => setState(() => _currentIndex = i),
+          onLongPress: (i) => setState(() => _currentIndex = i),
           items: [
             /// Home
             SalomonBottomBarItem(
