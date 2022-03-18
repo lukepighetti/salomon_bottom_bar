@@ -28,6 +28,7 @@ class _MyAppState extends State<MyApp> {
           title: Text(MyApp.title),
         ),
         bottomNavigationBar: SalomonBottomBar(
+          isCentered: true,
           currentIndex: _currentIndex,
           onTap: (i) => setState(() => _currentIndex = i),
           items: [
@@ -45,12 +46,12 @@ class _MyAppState extends State<MyApp> {
               selectedColor: Colors.pink,
             ),
 
-            /// Search
-            SalomonBottomBarItem(
-              icon: Icon(Icons.search),
-              title: Text("Search"),
-              selectedColor: Colors.orange,
-            ),
+            // /// Search
+            // SalomonBottomBarItem(
+            //   icon: Icon(Icons.search),
+            //   title: Text("Search"),
+            //   selectedColor: Colors.orange,
+            // ),
 
             /// Profile
             SalomonBottomBarItem(
