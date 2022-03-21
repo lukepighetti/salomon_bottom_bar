@@ -1,3 +1,8 @@
+## [3.3.0] - March 21, 2022
+
+- Use SafeArea like BottomNavigationBar
+- Support 2 or less SalomonBottomBarItems
+
 ## [3.2.0] - December 9, 2021
 
 - Added RTL text directionality support
