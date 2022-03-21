@@ -59,7 +59,11 @@ class SalomonBottomBar extends StatelessWidget {
     return Padding(
       padding: margin,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        /// Using a different alignment when there are 2 items or less
+        /// so it behaves the same as BottomNavigationBar.
+        mainAxisAlignment: items.length <= 2
+            ? MainAxisAlignment.spaceEvenly
+            : MainAxisAlignment.spaceBetween,
         children: [
           for (final item in items)
             TweenAnimationBuilder<double>(
