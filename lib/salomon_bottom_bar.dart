@@ -112,6 +112,7 @@ class SalomonBottomBar extends StatelessWidget {
                                 : item.icon,
                           ),
                           ClipRect(
+                            clipBehavior: Clip.antiAlias,
                             child: SizedBox(
                               /// TODO: Constrain item height without a fixed value
                               ///
