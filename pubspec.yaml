@@ -1,6 +1,6 @@
 name: salomon_bottom_bar
 description: Yet another bottom navigation bar, but with a few key promises.
-version: 3.3.0
+version: 3.3.1
 homepage: https://github.com/lukepighetti/salomon_bottom_bar
 
 environment:

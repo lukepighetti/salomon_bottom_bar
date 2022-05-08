@@ -1,3 +1,7 @@
+## [3.3.1] - May 7, 2022
+
+- Fix clip jank issue
+
 ## [3.3.0] - March 21, 2022
 
 - Use SafeArea like BottomNavigationBar
