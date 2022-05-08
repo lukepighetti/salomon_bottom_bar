@@ -1,0 +1,34 @@
+version: "3"
+
+tasks:
+  setup:
+    - flutter channel stable
+    - flutter upgrade
+
+  clean:
+    - flutter clean
+    - cd example && flutter clean
+
+  get:
+    - flutter pub get
+    - cd example && flutter pub get
+
+  test:
+    - flutter analyze
+    - flutter format --dry-run --set-exit-if-changed lib
+    - cd example && flutter analyze
+    - cd example && flutter format --dry-run --set-exit-if-changed lib
+
+  publish:
+    - flutter pub publish
+
+  ci:
+    - task: get
+    - task: test
+
+  distribute:
+    - task: setup
+    - task: clean
+    - task: get
+    - task: test
+    - task: publish
