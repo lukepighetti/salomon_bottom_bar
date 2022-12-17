@@ -1,3 +1,7 @@
+## [3.3.2] - Dec 17, 2022
+
+- Added option to choose your own background color (Default is still white 😄).
+
 ## [3.3.1] - May 7, 2022
 
 - Fix clip jank issue

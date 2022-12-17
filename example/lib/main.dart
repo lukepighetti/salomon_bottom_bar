@@ -24,10 +24,12 @@ class _MyAppState extends State<MyApp> {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: Scaffold(
+        backgroundColor: Colors.grey,
         appBar: AppBar(
           title: Text(MyApp.title),
         ),
         bottomNavigationBar: SalomonBottomBar(
+          backgroundColor: Colors.white,
           currentIndex: _currentIndex,
           onTap: (i) => setState(() => _currentIndex = i),
           items: [
