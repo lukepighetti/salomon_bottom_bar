@@ -1,4 +1,4 @@
-## [3.3.2] - Dec 17, 2022
+## [3.3.2] - Dec 27, 2022
 
 - Added option to choose your own background color (Default is still white 😄).
 

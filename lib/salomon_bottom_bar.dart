@@ -7,7 +7,7 @@ class SalomonBottomBar extends StatelessWidget {
   SalomonBottomBar({
     Key? key,
     required this.items,
-    required this.backgroundColor,
+    this.backgroundColor,
     this.currentIndex = 0,
     this.onTap,
     this.selectedItemColor,
@@ -59,12 +59,9 @@ class SalomonBottomBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final size = MediaQuery.of(context).size;
 
-    return Container(
-      width: double.infinity,
-      height: size.height * 0.085,
-      decoration: BoxDecoration(color: backgroundColor),
+    return ColoredBox(
+    color: backgroundColor ?? theme.bottomAppBarColor,
       child: SafeArea(
         minimum: margin,
         child: Row(
