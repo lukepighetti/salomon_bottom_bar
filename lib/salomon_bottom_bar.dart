@@ -9,6 +9,7 @@ class SalomonBottomBar extends StatelessWidget {
     required this.items,
     this.currentIndex = 0,
     this.onTap,
+    this.onLongPress,
     this.selectedItemColor,
     this.unselectedItemColor,
     this.selectedColorOpacity,
@@ -27,6 +28,8 @@ class SalomonBottomBar extends StatelessWidget {
 
   /// Returns the index of the tab that was tapped.
   final Function(int)? onTap;
+  
+  final Function(int)? onLongPress;
 
   /// The color of the icon and text when the item is selected.
   final Color? selectedItemColor;
@@ -89,6 +92,7 @@ class SalomonBottomBar extends StatelessWidget {
                   shape: itemShape,
                   child: InkWell(
                     onTap: () => onTap?.call(items.indexOf(item)),
+                    onLongPress: () => onLongPress?.call(items.indexOf(item)),
                     customBorder: itemShape,
                     focusColor: _selectedColor.withOpacity(0.1),
                     highlightColor: _selectedColor.withOpacity(0.1),
@@ -124,13 +128,13 @@ class SalomonBottomBar extends StatelessWidget {
                                 widthFactor: t,
                                 child: Padding(
                                   padding: Directionality.of(context) ==
-                                          TextDirection.ltr
+                                      TextDirection.ltr
                                       ? EdgeInsets.only(
-                                          left: itemPadding.left / 2,
-                                          right: itemPadding.right)
+                                      left: itemPadding.left / 2,
+                                      right: itemPadding.right)
                                       : EdgeInsets.only(
-                                          left: itemPadding.left,
-                                          right: itemPadding.right / 2),
+                                      left: itemPadding.left,
+                                      right: itemPadding.right / 2),
                                   child: DefaultTextStyle(
                                     style: TextStyle(
                                       color: Color.lerp(
