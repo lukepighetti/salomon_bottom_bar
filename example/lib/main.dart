@@ -21,6 +21,9 @@ class _MyAppState extends State<MyApp> {
       title: MyApp.title,
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          backgroundColor: Colors.white,
+        ),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: Scaffold(
