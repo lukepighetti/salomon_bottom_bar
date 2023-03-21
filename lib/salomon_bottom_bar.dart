@@ -61,7 +61,7 @@ class SalomonBottomBar extends StatelessWidget {
     final theme = Theme.of(context);
 
     return ColoredBox(
-      color: backgroundColor ?? theme.bottomAppBarColor,
+      color: backgroundColor ??  Colors.transparent,
       child: SafeArea(
         minimum: margin,
         child: Row(
