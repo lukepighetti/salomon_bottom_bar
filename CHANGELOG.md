@@ -1,3 +1,7 @@
+## [3.3.2] - March 31, 2023
+
+- Add backgroundColor
+
 ## [3.3.1] - May 7, 2022
 
 - Fix clip jank issue
@@ -9,7 +13,7 @@
 
 ## [3.2.0] - December 9, 2021
 
-- Added RTL text directionality support
+- Add RTL text directionality support
 
 ## [3.1.0] - June 17, 2021
 
