@@ -137,7 +137,7 @@ class SalomonBottomBar extends StatelessWidget {
                                         : EdgeInsets.only(
                                             left: itemPadding.left,
                                             right: itemPadding.right / 2),
-                                    child: DefaultTextStyle(
+                                    child: DefaultTextStyle.merge(
                                       style: TextStyle(
                                         color: Color.lerp(
                                             _selectedColor.withOpacity(0.0),
