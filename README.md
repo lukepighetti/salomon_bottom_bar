@@ -1,4 +1,7 @@
-# salomon_bottom_bar
+# salomon_bottom_bar_extend
+
+[salomon_bottom_bar](https://github.com/lukepighetti/salomon_bottom_bar) add iconAtRight, 
+textFontSize and textFontWeight property.
 
 Yet another bottom navigation bar, but with a few key promises.
 
