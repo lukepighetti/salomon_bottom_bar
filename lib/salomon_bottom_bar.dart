@@ -13,6 +13,8 @@ class SalomonBottomBar extends StatelessWidget {
     this.selectedItemColor,
     this.unselectedItemColor,
     this.selectedColorOpacity,
+    this.textFontSize,
+    this.textFontWeight,
     this.itemShape = const StadiumBorder(),
     this.margin = const EdgeInsets.all(8),
     this.itemPadding = const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
@@ -40,6 +42,12 @@ class SalomonBottomBar extends StatelessWidget {
 
   /// The opacity of color of the touchable background when the item is selected.
   final double? selectedColorOpacity;
+
+  /// The fontSize of the text.
+  final double? textFontSize;
+
+  /// The fontWeight of the text.
+  final FontWeight? textFontWeight;
 
   /// The border shape of each item.
   final ShapeBorder itemShape;
@@ -81,38 +89,38 @@ class SalomonBottomBar extends StatelessWidget {
 
                   final _unselectedColor = item.unselectedColor ?? unselectedItemColor ?? theme.iconTheme.color;
 
-                  final iconWidget = IconTheme(
-                    data: IconThemeData(
-                      color: Color.lerp(_unselectedColor, _selectedColor, t),
-                      size: 24,
+                  final children = [
+                    IconTheme(
+                      data: IconThemeData(
+                        color: Color.lerp(_unselectedColor, _selectedColor, t),
+                        size: 24,
+                      ),
+                      child: items.indexOf(item) == currentIndex ? item.activeIcon ?? item.icon : item.icon,
                     ),
-                    child: items.indexOf(item) == currentIndex ? item.activeIcon ?? item.icon : item.icon,
-                  );
-
-                  final labelWidget = ClipRect(
-                    clipBehavior: Clip.antiAlias,
-                    child: SizedBox(
-                      height: 20,
-                      child: Align(
-                        alignment: Alignment(-0.2, 0.0),
-                        widthFactor: t,
-                        child: Padding(
-                          padding: item.iconAtRight
-                              ? EdgeInsets.only(right: itemPadding.left / 2)
-                              : EdgeInsets.only(left: itemPadding.right / 2),
-                          child: DefaultTextStyle(
-                            style: TextStyle(
-                              color: Color.lerp(_selectedColor.withOpacity(0.0), _selectedColor, t),
-                              fontWeight: FontWeight.w600,
+                    ClipRect(
+                      clipBehavior: Clip.antiAlias,
+                      child: SizedBox(
+                        height: 20,
+                        child: Align(
+                          alignment: Alignment(-0.2, 0.0),
+                          widthFactor: t,
+                          child: Padding(
+                            padding: item.iconAtRight
+                                ? EdgeInsets.only(right: itemPadding.left / 2)
+                                : EdgeInsets.only(left: itemPadding.right / 2),
+                            child: DefaultTextStyle(
+                              style: TextStyle(
+                                color: Color.lerp(_selectedColor.withOpacity(0.0), _selectedColor, t),
+                                fontWeight: textFontWeight ?? FontWeight.w600,
+                                fontSize: textFontSize
+                              ),
+                              child: item.title,
                             ),
-                            child: item.title,
                           ),
                         ),
                       ),
-                    ),
-                  );
-
-                  final children = item.iconAtRight ? [labelWidget, iconWidget] : [iconWidget, labelWidget];
+                    )
+                  ];
 
                   return Material(
                     color: Color.lerp(
@@ -128,7 +136,7 @@ class SalomonBottomBar extends StatelessWidget {
                       child: Padding(
                         padding: itemPadding,
                         child: Row(
-                          children: children,
+                          children: item.iconAtRight ? children.reversed.toList() : children,
                         ),
                       ),
                     ),
