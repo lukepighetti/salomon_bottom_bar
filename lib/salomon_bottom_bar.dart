@@ -67,9 +67,7 @@ class SalomonBottomBar extends StatelessWidget {
         child: Row(
           /// Using a different alignment when there are 2 items or less
           /// so it behaves the same as BottomNavigationBar.
-          mainAxisAlignment: items.length <= 2
-              ? MainAxisAlignment.spaceEvenly
-              : MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: items.length <= 2 ? MainAxisAlignment.spaceEvenly : MainAxisAlignment.spaceBetween,
           children: [
             for (final item in items)
               TweenAnimationBuilder<double>(
@@ -79,19 +77,46 @@ class SalomonBottomBar extends StatelessWidget {
                 curve: curve,
                 duration: duration,
                 builder: (context, t, _) {
-                  final _selectedColor = item.selectedColor ??
-                      selectedItemColor ??
-                      theme.primaryColor;
+                  final _selectedColor = item.selectedColor ?? selectedItemColor ?? theme.primaryColor;
 
-                  final _unselectedColor = item.unselectedColor ??
-                      unselectedItemColor ??
-                      theme.iconTheme.color;
+                  final _unselectedColor = item.unselectedColor ?? unselectedItemColor ?? theme.iconTheme.color;
+
+                  final iconWidget = IconTheme(
+                    data: IconThemeData(
+                      color: Color.lerp(_unselectedColor, _selectedColor, t),
+                      size: 24,
+                    ),
+                    child: items.indexOf(item) == currentIndex ? item.activeIcon ?? item.icon : item.icon,
+                  );
+
+                  final labelWidget = ClipRect(
+                    clipBehavior: Clip.antiAlias,
+                    child: SizedBox(
+                      height: 20,
+                      child: Align(
+                        alignment: Alignment(-0.2, 0.0),
+                        widthFactor: t,
+                        child: Padding(
+                          padding: item.iconAtRight
+                              ? EdgeInsets.only(right: itemPadding.left / 2)
+                              : EdgeInsets.only(left: itemPadding.right / 2),
+                          child: DefaultTextStyle(
+                            style: TextStyle(
+                              color: Color.lerp(_selectedColor.withOpacity(0.0), _selectedColor, t),
+                              fontWeight: FontWeight.w600,
+                            ),
+                            child: item.title,
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+
+                  final children = item.iconAtRight ? [labelWidget, iconWidget] : [iconWidget, labelWidget];
 
                   return Material(
                     color: Color.lerp(
-                        _selectedColor.withOpacity(0.0),
-                        _selectedColor.withOpacity(selectedColorOpacity ?? 0.1),
-                        t),
+                        _selectedColor.withOpacity(0.0), _selectedColor.withOpacity(selectedColorOpacity ?? 0.1), t),
                     shape: itemShape,
                     child: InkWell(
                       onTap: () => onTap?.call(items.indexOf(item)),
@@ -101,57 +126,9 @@ class SalomonBottomBar extends StatelessWidget {
                       splashColor: _selectedColor.withOpacity(0.1),
                       hoverColor: _selectedColor.withOpacity(0.1),
                       child: Padding(
-                        padding: itemPadding -
-                            (Directionality.of(context) == TextDirection.ltr
-                                ? EdgeInsets.only(right: itemPadding.right * t)
-                                : EdgeInsets.only(left: itemPadding.left * t)),
+                        padding: itemPadding,
                         child: Row(
-                          children: [
-                            IconTheme(
-                              data: IconThemeData(
-                                color: Color.lerp(
-                                    _unselectedColor, _selectedColor, t),
-                                size: 24,
-                              ),
-                              child: items.indexOf(item) == currentIndex
-                                  ? item.activeIcon ?? item.icon
-                                  : item.icon,
-                            ),
-                            ClipRect(
-                              clipBehavior: Clip.antiAlias,
-                              child: SizedBox(
-                                /// TODO: Constrain item height without a fixed value
-                                ///
-                                /// The Align property appears to make these full height, would be
-                                /// best to find a way to make it respond only to padding.
-                                height: 20,
-                                child: Align(
-                                  alignment: Alignment(-0.2, 0.0),
-                                  widthFactor: t,
-                                  child: Padding(
-                                    padding: Directionality.of(context) ==
-                                            TextDirection.ltr
-                                        ? EdgeInsets.only(
-                                            left: itemPadding.left / 2,
-                                            right: itemPadding.right)
-                                        : EdgeInsets.only(
-                                            left: itemPadding.left,
-                                            right: itemPadding.right / 2),
-                                    child: DefaultTextStyle(
-                                      style: TextStyle(
-                                        color: Color.lerp(
-                                            _selectedColor.withOpacity(0.0),
-                                            _selectedColor,
-                                            t),
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                      child: item.title,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
+                          children: children,
                         ),
                       ),
                     ),
@@ -182,11 +159,15 @@ class SalomonBottomBarItem {
   /// The color to display when this tab is not selected.
   final Color? unselectedColor;
 
+  /// The icon is set to the right of label
+  final bool iconAtRight;
+
   SalomonBottomBarItem({
     required this.icon,
     required this.title,
     this.selectedColor,
     this.unselectedColor,
     this.activeIcon,
+    this.iconAtRight = false,
   });
 }
