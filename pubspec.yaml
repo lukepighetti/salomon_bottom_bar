@@ -1,7 +1,7 @@
-name: salomon_bottom_bar
+name: salomon_bottom_bar_extend
 description: Yet another bottom navigation bar, but with a few key promises.
 version: 3.3.2
-homepage: https://github.com/lukepighetti/salomon_bottom_bar
+homepage: https://github.com/andfaraway/salomon_bottom_bar
 
 environment:
   sdk: ">=2.12.0 <3.0.0"

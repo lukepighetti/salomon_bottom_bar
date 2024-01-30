@@ -57,6 +57,7 @@ class _MyAppState extends State<MyApp> {
               icon: Icon(Icons.person),
               title: Text("Profile"),
               selectedColor: Colors.teal,
+              iconAtRight: true,
             ),
           ],
         ),
