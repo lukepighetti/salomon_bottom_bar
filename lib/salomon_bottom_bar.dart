@@ -14,6 +14,7 @@ class SalomonBottomBar extends StatelessWidget {
     this.unselectedItemColor,
     this.selectedColorOpacity,
     this.itemShape = const StadiumBorder(),
+    this.itemDecoration,
     this.margin = const EdgeInsets.all(8),
     this.itemPadding = const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
     this.duration = const Duration(milliseconds: 500),
@@ -43,6 +44,9 @@ class SalomonBottomBar extends StatelessWidget {
 
   /// The border shape of each item.
   final ShapeBorder itemShape;
+
+  /// The decoration of each item.
+  final SalomonItemDecoration? itemDecoration;
 
   /// A convenience field for the margin surrounding the entire widget.
   final EdgeInsets margin;
@@ -79,6 +83,8 @@ class SalomonBottomBar extends StatelessWidget {
                 curve: curve,
                 duration: duration,
                 builder: (context, t, _) {
+                  final isSelected = items.indexOf(item) == currentIndex;
+
                   final _selectedColor = item.selectedColor ??
                       selectedItemColor ??
                       theme.primaryColor;
@@ -87,71 +93,88 @@ class SalomonBottomBar extends StatelessWidget {
                       unselectedItemColor ??
                       theme.iconTheme.color;
 
-                  return Material(
-                    color: Color.lerp(
-                        _selectedColor.withOpacity(0.0),
-                        _selectedColor.withOpacity(selectedColorOpacity ?? 0.1),
-                        t),
-                    shape: itemShape,
-                    child: InkWell(
-                      onTap: () => onTap?.call(items.indexOf(item)),
-                      customBorder: itemShape,
-                      focusColor: _selectedColor.withOpacity(0.1),
-                      highlightColor: _selectedColor.withOpacity(0.1),
-                      splashColor: _selectedColor.withOpacity(0.1),
-                      hoverColor: _selectedColor.withOpacity(0.1),
-                      child: Padding(
-                        padding: itemPadding -
-                            (Directionality.of(context) == TextDirection.ltr
-                                ? EdgeInsets.only(right: itemPadding.right * t)
-                                : EdgeInsets.only(left: itemPadding.left * t)),
-                        child: Row(
-                          children: [
-                            IconTheme(
-                              data: IconThemeData(
-                                color: Color.lerp(
-                                    _unselectedColor, _selectedColor, t),
-                                size: 24,
+                  final _selectedBoxShadow = item.selectedBoxShadow ??
+                      itemDecoration?.selectedBoxShadow ??
+                      null;
+
+                  final _unselectedBoxShadow = item.unselectedBoxShadow ??
+                      itemDecoration?.unselectedBoxShadow ??
+                      null;
+
+                  return Container(
+                    decoration: (itemDecoration != null ||
+                            item.selectedBoxShadow != null ||
+                            item.unselectedBoxShadow != null)
+                        ? BoxDecoration(
+                            boxShadow: isSelected
+                                ? _selectedBoxShadow
+                                : _unselectedBoxShadow,
+                          )
+                        : null,
+                    child: Material(
+                      shape: itemShape,
+                      child: InkWell(
+                        onTap: () => onTap?.call(items.indexOf(item)),
+                        customBorder: itemShape,
+                        focusColor: _selectedColor.withOpacity(0.1),
+                        highlightColor: _selectedColor.withOpacity(0.1),
+                        splashColor: _selectedColor.withOpacity(0.1),
+                        hoverColor: _selectedColor.withOpacity(0.1),
+                        child: Padding(
+                          padding: itemPadding -
+                              (Directionality.of(context) == TextDirection.ltr
+                                  ? EdgeInsets.only(
+                                      right: itemPadding.right * t)
+                                  : EdgeInsets.only(
+                                      left: itemPadding.left * t)),
+                          child: Row(
+                            children: [
+                              IconTheme(
+                                data: IconThemeData(
+                                  color: Color.lerp(
+                                      _unselectedColor, _selectedColor, t),
+                                  size: 24,
+                                ),
+                                child: items.indexOf(item) == currentIndex
+                                    ? item.activeIcon ?? item.icon
+                                    : item.icon,
                               ),
-                              child: items.indexOf(item) == currentIndex
-                                  ? item.activeIcon ?? item.icon
-                                  : item.icon,
-                            ),
-                            ClipRect(
-                              clipBehavior: Clip.antiAlias,
-                              child: SizedBox(
-                                /// TODO: Constrain item height without a fixed value
-                                ///
-                                /// The Align property appears to make these full height, would be
-                                /// best to find a way to make it respond only to padding.
-                                height: 20,
-                                child: Align(
-                                  alignment: Alignment(-0.2, 0.0),
-                                  widthFactor: t,
-                                  child: Padding(
-                                    padding: Directionality.of(context) ==
-                                            TextDirection.ltr
-                                        ? EdgeInsets.only(
-                                            left: itemPadding.left / 2,
-                                            right: itemPadding.right)
-                                        : EdgeInsets.only(
-                                            left: itemPadding.left,
-                                            right: itemPadding.right / 2),
-                                    child: DefaultTextStyle(
-                                      style: TextStyle(
-                                        color: Color.lerp(
-                                            _selectedColor.withOpacity(0.0),
-                                            _selectedColor,
-                                            t),
-                                        fontWeight: FontWeight.w600,
+                              ClipRect(
+                                clipBehavior: Clip.antiAlias,
+                                child: SizedBox(
+                                  /// TODO: Constrain item height without a fixed value
+                                  ///
+                                  /// The Align property appears to make these full height, would be
+                                  /// best to find a way to make it respond only to padding.
+                                  height: 20,
+                                  child: Align(
+                                    alignment: Alignment(-0.2, 0.0),
+                                    widthFactor: t,
+                                    child: Padding(
+                                      padding: Directionality.of(context) ==
+                                              TextDirection.ltr
+                                          ? EdgeInsets.only(
+                                              left: itemPadding.left / 2,
+                                              right: itemPadding.right)
+                                          : EdgeInsets.only(
+                                              left: itemPadding.left,
+                                              right: itemPadding.right / 2),
+                                      child: DefaultTextStyle(
+                                        style: TextStyle(
+                                          color: Color.lerp(
+                                              _selectedColor.withOpacity(0.0),
+                                              _selectedColor,
+                                              t),
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                        child: item.title,
                                       ),
-                                      child: item.title,
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -182,11 +205,78 @@ class SalomonBottomBarItem {
   /// The color to display when this tab is not selected.
   final Color? unselectedColor;
 
+  /// You can override each items boxShadow with this property
+  ///
+  /// A list of shadows cast by this box behind the box (when selected).
+  ///
+  /// The shadow follows the [shape] of the box.
+  ///
+  /// See also:
+  ///
+  ///  * [kElevationToShadow], for some predefined shadows used in Material
+  ///    Design.
+  ///  * [PhysicalModel], a widget for showing shadows.
+  final List<BoxShadow>? selectedBoxShadow;
+
+  /// You can override each items boxShadow with this property
+  ///
+  /// A list of shadows cast by this box behind the box (when not selected).
+  ///
+  /// The shadow follows the [shape] of the box.
+  ///
+  /// See also:
+  ///
+  ///  * [kElevationToShadow], for some predefined shadows used in Material
+  ///    Design.
+  ///  * [PhysicalModel], a widget for showing shadows.
+  final List<BoxShadow>? unselectedBoxShadow;
+
   SalomonBottomBarItem({
     required this.icon,
     required this.title,
     this.selectedColor,
     this.unselectedColor,
     this.activeIcon,
+    this.selectedBoxShadow,
+    this.unselectedBoxShadow,
   });
+}
+
+/// A controlled [Decoration] for each [SalomonBottomBarItem]
+class SalomonItemDecoration {
+  /// A list of shadows cast by this box behind the box (when selected).
+  ///
+  /// The shadow follows the [shape] of the box.
+  ///
+  /// See also:
+  ///
+  ///  * [kElevationToShadow], for some predefined shadows used in Material
+  ///    Design.
+  ///  * [PhysicalModel], a widget for showing shadows.
+  final List<BoxShadow>? selectedBoxShadow;
+
+  /// A list of shadows cast by this box behind the box (when not selected).
+  ///
+  /// The shadow follows the [shape] of the box.
+  ///
+  /// See also:
+  ///
+  ///  * [kElevationToShadow], for some predefined shadows used in Material
+  ///    Design.
+  ///  * [PhysicalModel], a widget for showing shadows.
+  final List<BoxShadow>? unselectedBoxShadow;
+
+  const SalomonItemDecoration({
+    this.selectedBoxShadow,
+    this.unselectedBoxShadow,
+  });
+
+  SalomonItemDecoration copyWith({
+    List<BoxShadow>? selectedBoxShadow,
+    List<BoxShadow>? unselectedBoxShadow,
+  }) =>
+      SalomonItemDecoration(
+        selectedBoxShadow: selectedBoxShadow ?? this.selectedBoxShadow,
+        unselectedBoxShadow: unselectedBoxShadow ?? this.unselectedBoxShadow,
+      );
 }
