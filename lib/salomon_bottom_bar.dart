@@ -18,6 +18,7 @@ class SalomonBottomBar extends StatelessWidget {
     this.itemPadding = const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
     this.duration = const Duration(milliseconds: 500),
     this.curve = Curves.easeOutQuint,
+    this.bottombarAlignment,
   }) : super(key: key);
 
   /// A list of tabs to display, ie `Home`, `Likes`, etc
@@ -56,6 +57,9 @@ class SalomonBottomBar extends StatelessWidget {
   /// The transition curve
   final Curve curve;
 
+  /// The row items alignment for bottom bar.
+  final MainAxisAlignment? bottombarAlignment;
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -67,9 +71,11 @@ class SalomonBottomBar extends StatelessWidget {
         child: Row(
           /// Using a different alignment when there are 2 items or less
           /// so it behaves the same as BottomNavigationBar.
-          mainAxisAlignment: items.length <= 2
-              ? MainAxisAlignment.spaceEvenly
-              : MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: bottombarAlignment != null
+              ? bottombarAlignment!
+              : items.length <= 2
+                  ? MainAxisAlignment.spaceEvenly
+                  : MainAxisAlignment.spaceBetween,
           children: [
             for (final item in items)
               TweenAnimationBuilder<double>(
