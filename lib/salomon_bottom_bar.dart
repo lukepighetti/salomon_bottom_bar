@@ -67,6 +67,7 @@ class SalomonBottomBar extends StatelessWidget {
         child: Row(
           /// Using a different alignment when there are 2 items or less
           /// so it behaves the same as BottomNavigationBar.
+          spacing: 4,
           mainAxisAlignment: items.length <= 2
               ? MainAxisAlignment.spaceEvenly
               : MainAxisAlignment.spaceBetween,
