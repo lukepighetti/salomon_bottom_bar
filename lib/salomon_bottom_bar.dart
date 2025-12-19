@@ -89,6 +89,7 @@ class SalomonBottomBar extends StatelessWidget {
                       theme.iconTheme.color;
 
                   return Material(
+                    key: item.key,
                     color: Color.lerp(
                         _selectedColor.withOpacity(0.0),
                         _selectedColor.withOpacity(selectedColorOpacity ?? 0.1),
@@ -168,6 +169,11 @@ class SalomonBottomBar extends StatelessWidget {
 
 /// A tab to display in a [SalomonBottomBar]
 class SalomonBottomBarItem {
+  /// A key to be passed through to the resultant widget.
+  ///
+  /// This allows the identification of different [SalomonBottomBarItem]s through their keys.
+  final Key? key;
+
   /// An icon to display.
   final Widget icon;
 
@@ -184,6 +190,7 @@ class SalomonBottomBarItem {
   final Color? unselectedColor;
 
   SalomonBottomBarItem({
+    this.key,
     required this.icon,
     required this.title,
     this.selectedColor,
