@@ -18,6 +18,7 @@ class SalomonBottomBar extends StatelessWidget {
     this.itemPadding = const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
     this.duration = const Duration(milliseconds: 500),
     this.curve = Curves.easeOutQuint,
+    this.splashActive = true,
   }) : super(key: key);
 
   /// A list of tabs to display, ie `Home`, `Likes`, etc
@@ -55,6 +56,9 @@ class SalomonBottomBar extends StatelessWidget {
 
   /// The transition curve
   final Curve curve;
+
+  /// The splash animastion is active 
+  final bool splashActive;
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +103,7 @@ class SalomonBottomBar extends StatelessWidget {
                       customBorder: itemShape,
                       focusColor: _selectedColor.withOpacity(0.1),
                       highlightColor: _selectedColor.withOpacity(0.1),
-                      splashColor: _selectedColor.withOpacity(0.1),
+                      splashColor: splashActive ? _selectedColor.withOpacity(0.1) : Colors.transparent,
                       hoverColor: _selectedColor.withOpacity(0.1),
                       child: Padding(
                         padding: itemPadding -
