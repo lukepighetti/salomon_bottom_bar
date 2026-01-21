@@ -22,4 +22,4 @@ Create an issue / pull-request when we are not keeping our promises, ie:
 
 1. The package does not match the Salomon specification.
 2. There is an accessibility problem.
-3. It diverges from `BottomNavigationBar` semantics.
+3. It diverges from `BottomNavigationBar` semantics
